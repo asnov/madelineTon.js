@@ -18,11 +18,9 @@ import {
 class CryptoSync {
     /**
      * 
-     * @param {Parser} parser TL Parser
+     * @param {Parser} TL TL Parser
      */
-    constructor(parser) {
-        this.TL = parser
-    }
+    constructor(private TL) { }
     /**
      * Factorize semiprime
      * @param {Uint8Array} what Number to factorize
@@ -47,7 +45,7 @@ class CryptoSync {
     }
     /**
      * SHA1
-     * @param {Uint32Array} data Data to hash
+     * @param {Uint32Array} buffer Data to hash
      * @returns Uint32Array
      */
     sha1(buffer) {
@@ -55,7 +53,7 @@ class CryptoSync {
     }
     /**
      * SHA256
-     * @param {Uint32Array} data Data to hash
+     * @param {Uint32Array} buffer Data to hash
      * @returns Uint32Array
      */
     sha256(buffer) {

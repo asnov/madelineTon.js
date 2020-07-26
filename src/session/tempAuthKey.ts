@@ -5,6 +5,8 @@ class TempAuthKey extends AuthKey {
     expires_at = 0
     inited = false
     pfs = true
+
+    bound;
     /**
      * initConnection
      * @param boolean Whether connection was inited

@@ -30,7 +30,7 @@ function rng_seed_time() {
 
 // Initialize the pool with junk if needed.
 if (rng_pool == null) {
-  rng_pool = new Array();
+  rng_pool = [];
   rng_pptr = 0;
   var t;
   if (windowObject.crypto && windowObject.crypto.getRandomValues) {
@@ -42,7 +42,7 @@ if (rng_pool == null) {
   }
   if (navigator.appName == "Netscape" && navigator.appVersion < "5" && windowObject.crypto) {
     // Extract entropy (256 bits) from NS4 RNG if available
-    var z = windowObject.crypto.random(32);
+    var z = (windowObject.crypto as any).random(32);
     for (t = 0; t < z.length; ++t)
       rng_pool[rng_pptr++] = z.charCodeAt(t) & 255;
   }

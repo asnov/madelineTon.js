@@ -1,6 +1,11 @@
 class Context
 {
     _secure = true
+    private dc: any;
+    private host: any;
+    private port: any;
+    private crypto: any;
+
     secure(secure) {
         this._secure = secure
         return this

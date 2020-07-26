@@ -1,6 +1,10 @@
 import Stream from "../TL/stream"
 
 class Http {
+    private uri: string;
+    private onMessage: any;
+    private xhr: any;
+
     connect(ctx) {
         this.uri = ctx.getUri('http')
         return Promise.resolve()
@@ -17,9 +21,9 @@ class Http {
     }
 
     getBuffer(length) {
-        const s = new Stream(new Uint32Array(5 + (length || 0)))
-        s.pos += 5
-        s.initPos = 0
+        const s = new Stream(new Uint32Array(5 + (length || 0)));
+        s.pos += 5;
+        (s as any).initPos = 0  // fixed. TODO: check it
         return s
     }
     onHttpMessage() {

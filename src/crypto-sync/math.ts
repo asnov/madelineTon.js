@@ -38,6 +38,7 @@ const checkPG = (p, g) => {
     if (!greater(g, one) || !greater(sub(p, twoe1984), g)) {
         throw new Error('g is invalid (1 < g < p - 1 is false).')
     }
+    return true;
 }
 /**
  * Check validity of diffie hellman parameters
@@ -45,7 +46,7 @@ const checkPG = (p, g) => {
  * @param {*} g Hex generator
  * @param {*} G_ Hex generated
  */
-const checkAll = (p, g, G_) => checkPG(p, g) && checkG(G_, p)
+const checkAll = (p, g, G_) => checkPG(p, g) && checkG(G_, p);
 export {
     checkAll,
     checkG,

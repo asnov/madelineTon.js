@@ -1,5 +1,5 @@
 import Stream from "../TL/stream"
-import Rusha from 'rusha'
+import * as Rusha from 'rusha'
 import CryptoJS from '../lib/cryptoJS/crypto'
 import {
     transfer,
@@ -16,7 +16,7 @@ import {
     mod,
     bigInt2str
 } from "leemon"
-import nacl from '../lib/nacl-fast'
+import * as nacl from '../lib/nacl-fast';
 
 const modulo = str2bigInt('7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed', 16)
 
@@ -61,7 +61,7 @@ const incCounter = Stream.bigEndian ? incCounterBigEndian : incCounterLittleEndi
 /**
  * Pad buffer
  * @param {BufferSource} buffer Buffer
- * @param {number}       size   Pad to a multiple of this (must be a multiple of 4)
+ * @param {number} pad Pad to a multiple of this (must be a multiple of 4)
  * @returns {ArrayBuffer} Padded array
  */
 const pad = (buffer, pad) => {
@@ -92,12 +92,12 @@ const wordsToBytesLittleEndian = buffer => Uint32Array.from(buffer.words.map(Str
 const wordsToBytesBigEndian = buffer => Uint32Array.from(buffer.words).buffer
 const wordsToBytes = Stream.bigEndian ? wordsToBytesBigEndian : wordsToBytesLittleEndian
 
-const toBigEndian = Stream.bigEndian ? (buffer => buffer) : buffer => buffer.map(Stream.switcheroo)
+const toBigEndian = Stream.bigEndian ? (buffer) => buffer : buffer => buffer.map(Stream.switcheroo)
 /**
  * SHA256 hash
  * @param {Uint32Array} data Data to hash
  */
-const sha256 = data => wordsToBytes(CryptoJS.SHA256(bytesToWords(data instanceof Uint32Array ? data : new Uint32Array(data.buffer)))).words.buffer
+const sha256 = data => wordsToBytes(CryptoJS.SHA256(bytesToWords(data instanceof Uint32Array ? data : new Uint32Array(data.buffer))))   // fixed
 
 const rushaInstance = new Rusha(1024 * 1024)
 /**
@@ -166,10 +166,10 @@ const initEC = peerPublic => {
     peerPublic = multMod(y, y2, modulo)
     peerPublic = hexToBytes(bigInt2str(peerPublic, 16)).reverse()
 
-    const edwardsPair = nacl.sign.keyPair() // nacl.sign.keyPair.fromSeed(hexToBytes('de880e4b5ee99eb1e6b31b8466a63ba4add52c4c91ac34bc23b9c33cb9f4e646'))
-    const montgomeryPair = nacl.box.keyPair.fromSecretKey(edwardsPair.d.slice(0, 32))
+    const edwardsPair = (nacl as any).sign.keyPair() // nacl.sign.keyPair.fromSeed(hexToBytes('de880e4b5ee99eb1e6b31b8466a63ba4add52c4c91ac34bc23b9c33cb9f4e646'))
+    const montgomeryPair = (nacl as any).box.keyPair.fromSecretKey(edwardsPair.d.slice(0, 32))
 
-    const secret = nacl.scalarMult(montgomeryPair.secretKey, peerPublic)
+    const secret = (nacl as any).scalarMult(montgomeryPair.secretKey, peerPublic)
 
     //console.log("Private: ", bytesToHex(montgomeryPair.secretKey))
     //console.log("Public: ", bytesToHex(peerPublic))

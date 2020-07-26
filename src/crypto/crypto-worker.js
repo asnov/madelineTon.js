@@ -4,9 +4,9 @@ import {
 import CWorker from './c.worker'
 
 class CryptoWorker {
-    constructor(parser, timeout) {
+    constructor(parser, timeout = 200000) { // Change later
         this.tasks = []
-        this.timeout = timeout || 200000 // Change later
+        this.timeout = timeout
 
         this.worker = new CWorker()
         this.worker.onmessage = this.onMessage.bind(this)
@@ -97,7 +97,7 @@ class CryptoWorker {
      * @param {Uint32Array} data Data
      * @param {Uint32Array} key  Key
      * @param {Uint32Array} iv   IV
-     * @returns {ArrayBuffer}
+     * @returns {Promise<ArrayBuffer>}
      */
     igeEncrypt(data, key, iv) {
         return this.asyncTask({

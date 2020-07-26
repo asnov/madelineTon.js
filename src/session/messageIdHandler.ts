@@ -1,10 +1,9 @@
 import Long from '../lib/bigint/long'
 
 class MessageIdHandler {
-    constructor() {
-        this.maxIncoming = new Long(0, 0)
-        this.maxOutgoing = new Long(0, 0)
-    }
+    maxIncoming = new Long(0, 0)
+    maxOutgoing = new Long(0, 0)
+
     /**
      * Check incoming message ID
      * @param {number[]} id 

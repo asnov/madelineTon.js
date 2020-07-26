@@ -17,10 +17,11 @@ import {
 import {
     powMod
 } from 'leemon'
+import { rng_seed_time } from "../lib/rng";
 
 let ctrWorkers = []
 //let parser
-onmessage = message => {
+window.onmessage = message => {
     message = message['data']
     let result
     try {
@@ -84,16 +85,16 @@ onmessage = message => {
                 break
             case 'crc16':
                 result = crc16(message['data'])
-                berak
+                break
         }
     } catch (e) {
         return postMessage({
             e,
             id: message['id']
-        })
+        }, 'c.worker')
     }
     postMessage({
         result,
         id: message['id']
-    })
+    }, 'c.worker')
 }

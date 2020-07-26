@@ -1,6 +1,9 @@
 import TempAuthKey from "./tempAuthKey";
 
 class AuthInfo {
+    tempAuthKey;
+    permAuthKey;
+
     /**
      * Set auth key
      * @param {AuthKey} key  AuthKey

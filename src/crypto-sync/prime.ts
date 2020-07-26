@@ -34,7 +34,7 @@ import Stream from '../TL/stream'
 const toBuffers = (PBig, QBig) => {
     PBig = Stream.switcheroo(PBig)
     QBig = Stream.switcheroo(QBig)
-    let stream = new Stream(new ArrayBuffer(8))
+    let stream: Stream & ArrayBuffer = new Stream(new ArrayBuffer(8)) as any;   // TODO: check it
     stream.writeUnsignedInt(PBig).writeUnsignedInt(QBig)
     stream = stream.getBuffer()
     return [new Uint8Array(stream, 0, 4), new Uint8Array(stream, 4, 4)]
@@ -122,7 +122,7 @@ const leemon = what => {
     var minLen = Math.ceil(minBits / bpe) + 1
     var i, q
     var j, lim
-    var g, P
+    var P
     var Q
     var a = new Array(minLen)
     var b = new Array(minLen)

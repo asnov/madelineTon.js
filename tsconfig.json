@@ -4,7 +4,13 @@
     "allowJs": true,
     "module": "commonjs",
     "target": "es5",
-    "sourceMap": true
+    "sourceMap": true,
+    "lib": [
+      "ESNext",
+      "dom"
+    ],
+    "baseUrl": ".",
+    "resolveJsonModule": true
   },
   "include": [
     "./src/**.*"

@@ -38,8 +38,7 @@ const bytesToHex = bytes => {
  * @param {string} hex Hex
  * @param {Uint8Array} out Output array
  */
-const hexToBytes = (hex, out) => {
-    out = out || new Uint8Array(hex.length / 2)
+const hexToBytes = (hex, out = new Uint8Array(hex.length / 2)) => {
     const length = out.length
     for (let x = 0; x < length; x++) {
         out[x] = parseInt(hex[x * 2].concat(hex[x * 2 + 1]), 16)
@@ -80,7 +79,7 @@ const bufferViewEqual = (a, b) => {
  * @param {Uint8Array} b 
  * @param {Uint8Array|undefined} c
  */
-const bufferConcat = (a, b, c) => {
+const bufferConcat = (a, b, c?) => {
     let res = new Uint8Array(a.byteLength + b.byteLength + (c ? c.byteLength : 0))
     res.set(a)
     res.set(b, a.byteLength)
@@ -104,7 +103,8 @@ const transferPoly = function (source, length) {
     return destView.buffer;
 };
 
-const transfer = ArrayBuffer.transfer || transferPoly
+// https://developer.mozilla.org/en-US/docs/Archive/Web/JavaScript/ArrayBuffer.transfer
+const transfer = (ArrayBuffer as any).transfer || transferPoly  // experimental
 
 const atobInt8 = data => {
     data = atob(data);

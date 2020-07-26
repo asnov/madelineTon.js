@@ -45,8 +45,8 @@ if (useWebCryptoRandom) {
  * @param {number} mod Modulo
  * @returns number
  */
-const fastRandomInt = mod => {
-    return Math.floor(Math.random() * (mod || 0xFFFFFFFF))
+const fastRandomInt = (mod = 0xFFFFFFFF) => {
+    return Math.floor(Math.random() * mod)
 }
 
 /**
@@ -54,8 +54,8 @@ const fastRandomInt = mod => {
  * @param {number} mod Modulo
  * @returns number
  */
-const secureRandomInt = mod => {
-    return secureRandom(new Uint32Array(1))[0] % (mod || 0xFFFFFFFF)
+const secureRandomInt = (mod = 0xFFFFFFFF) => {
+    return secureRandom(new Uint32Array(1))[0] % mod;
 }
 
 export {

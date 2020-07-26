@@ -8,13 +8,12 @@ class API {
     lastDc = 4
     layer = 105
 
-    constructor(settings) {
-        this.settings = settings
+    TLObjects = new Objects(this.settings['schemes'])
+    TLParser = new Parser(this.TLObjects, undefined)    // fixed. TODO: check it
+    datacenter = new DataCenter
+    auther = new Auther(this)
 
-        this.TLObjects = new Objects(settings['schemes'])
-        this.TLParser = new Parser(this.TLObjects)
-        this.datacenter = new DataCenter
-        this.auther = new Auther(this)
+    constructor(private settings) {
     }
     async connect() {
         await this.auther.auth()

@@ -1,22 +1,30 @@
-let windowObject = {}
+declare var WorkerGlobalScope;
+
+let windowObject: typeof window & {
+    msCrypto: any;
+    crypto: typeof window.crypto & {
+        webkitSubtle: any;
+    }
+};
 if (typeof window !== 'undefined') {
-    windowObject = window
+    windowObject = window as any;
 } else if (typeof crypto !== 'undefined') {
     windowObject = {
         crypto: crypto
-    }
+    } as typeof window
 }
 
 if (windowObject.msCrypto) {
-    windowObject.crypto = windowObject.msCrypto
+    (windowObject as any).crypto = windowObject.msCrypto
 }
 if (windowObject.crypto && windowObject.crypto.webkitSubtle) {
-    windowObject.crypto.subtle = windowObject.crypto.webkitSubtle
+    (windowObject.crypto as any).subtle = windowObject.crypto.webkitSubtle
 }
 let useWebCrypto = !!windowObject.crypto
 let useWebCryptoRandom = useWebCrypto && !!windowObject.crypto.getRandomValues
 let useWebCryptoSha1 = useWebCrypto && !windowObject.msCrypto
-let useWorkers = !!windowObject.Worker
+// let useWorkers = !!windowObject.Worker
+let useWorkers = false
 let isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope
 
 let prefix = isWorker ? "Worker: " : ""

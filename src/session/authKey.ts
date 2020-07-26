@@ -1,9 +1,13 @@
 class AuthKey
 {
+    key;
+    id;
+    salt;
+
     /**
      * Set auth key
      * @param {BufferSource} key 
-     * @param {BufferSource} ID
+     * @param {BufferSource} id
      */
     setAuthKey(key, id) {
         this.key = key

@@ -18,6 +18,16 @@ class ADNL {
     bufferOffset = 0
     cBufferIndex = 0
 
+    crypto;
+    encrypt;
+    decrypt;
+    previous;
+    socket;
+    isRunning: boolean;
+
+    public onClose;
+    public onMessage;
+
     /**
      * 
      * @param {Object} ctx Custom connection context

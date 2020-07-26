@@ -1,0 +1,79 @@
+/Users/alexnew/FreeTON/madelineTon.js/src/TL/objects.ts
+Warning:(1, 1) Unused import Stream from "./stream"
+Warning:(35, 58) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(43, 48) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(57, 51) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(152, 17) 'id = this.byPredicateAndLayer[predicate + myLayer]' used as condition
+/Users/alexnew/FreeTON/madelineTon.js/src/network/adnl.ts
+Warning:(8, 5) Unused import specifier fastRandomInt
+/Users/alexnew/FreeTON/madelineTon.js/src/crypto-sync/prime.ts
+Warning:(15, 5) Unused import specifier int2bigInt
+Warning:(16, 5) Unused import specifier leftShift_
+Warning:(18, 5) Unused import specifier mult_
+Warning:(48, 22) Parameter PQ described in JSDoc does not appear in function signature
+Warning:(51, 14) Parameter what is not described in JSDoc
+Warning:(56, 13) 'x' should probably not be assigned to 'y'
+Warning:(84, 17) 'x' should probably not be assigned to 'y'
+Warning:(115, 20) Parameter PQ described in JSDoc does not appear in function signature
+Warning:(118, 16) Parameter what is not described in JSDoc
+Warning:(147, 26) Bitwise operator used
+Warning:(201, 24) Parameter Array described in JSDoc does not appear in function signature
+Warning:(204, 19) Parameter what is not described in JSDoc
+/Users/alexnew/FreeTON/madelineTon.js/src/test.ts
+Warning:(6, 7) Unused class Tester
+/Users/alexnew/FreeTON/madelineTon.js/src/session/tempAuthKey.ts
+Warning:(12, 15) Parameter boolean described in JSDoc does not appear in function signature
+Warning:(14, 10) Parameter init is not described in JSDoc
+Warning:(27, 15) Parameter boolean described in JSDoc does not appear in function signature
+Warning:(29, 20) Parameter pfs is not described in JSDoc
+/Users/alexnew/FreeTON/madelineTon.js/src/crypto/crypto-sync.ts
+Warning:(14, 1) Unused import {
+    gunzipSync
+} from "zlib"
+/Users/alexnew/FreeTON/madelineTon.js/src/crypto/c.worker.ts
+Warning:(22, 5) Unused local variable ctrWorkers
+/Users/alexnew/FreeTON/madelineTon.js/src/adnl-connection.ts
+Warning:(23, 24) Parameter endpoint described in JSDoc does not appear in function signature
+Warning:(24, 24) Parameter URI described in JSDoc does not appear in function signature
+Warning:(26, 35) Parameter key is not described in JSDoc
+Warning:(26, 48) Parameter uri is not described in JSDoc
+Warning:(100, 28) Parameter query described in JSDoc does not appear in function signature
+Warning:(102, 15) Parameter data is not described in JSDoc
+/Users/alexnew/FreeTON/madelineTon.js/src/TL/parser.ts
+Warning:(25, 34) Parameter callbacks is not described in JSDoc
+Warning:(92, 40) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(95, 28) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(98, 45) Bitwise operator used
+Warning:(102, 20) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(110, 16) Unresolved variable or type 'mixed'
+Warning:(110, 24) Parameter data described in JSDoc does not appear in function signature
+Warning:(113, 23) Parameter dataToSerialize is not described in JSDoc
+Warning:(179, 45) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(190, 40) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(194, 27) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(208, 40) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(210, 29) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(261, 93) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(283, 41) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+/Users/alexnew/FreeTON/madelineTon.js/src/crypto-sync/math.ts
+Warning:(10, 7) Unused constant twoe2047
+Warning:(11, 7) Unused constant twoe2048
+Warning:(12, 7) Unused constant twozerotwosixone
+Warning:(13, 7) Unused constant zeroeight
+Warning:(18, 12) Unresolved variable or type 'leemonBigInt'
+Warning:(19, 12) Unresolved variable or type 'leemonBigInt'
+Warning:(31, 12) Unresolved variable or type 'leemonBigInt'
+Warning:(32, 12) Unresolved variable or type 'leemonBigInt'
+/Users/alexnew/FreeTON/madelineTon.js/src/lib/rng.ts
+Warning:(32, 5) Variable might not have been initialized
+/Users/alexnew/FreeTON/madelineTon.js/src/crypto/crypto-worker.js
+Warning:(75, 29) Parameter data described in JSDoc does not appear in function signature
+Warning:(78, 10) Parameter buffer is not described in JSDoc
+Warning:(86, 29) Parameter data described in JSDoc does not appear in function signature
+Warning:(89, 12) Parameter buffer is not described in JSDoc
+Warning:(127, 16) Unresolved variable or type 'leemonBigInt'
+Warning:(128, 16) Unresolved variable or type 'leemonBigInt'
+Warning:(129, 16) Unresolved variable or type 'leemonBigInt'
+Warning:(130, 18) Unresolved variable or type 'leemonBigInt'
+/Users/alexnew/FreeTON/madelineTon.js/src/crypto-sync/crypto.ts
+Warning:(95, 7) Unused constant toBigEndian

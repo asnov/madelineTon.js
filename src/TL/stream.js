@@ -9,9 +9,9 @@ import {
 class Stream {
     /**
      * 
-     * @param {ArrayBuffer} aBuf Buffer
+     * @param {ArrayBuffer?} aBuf Buffer
      */
-    constructor(aBuf) {
+    constructor(aBuf= undefined) {
         this.pos = 0
         this.aBuf = aBuf || new ArrayBuffer
         this.iBuf = new Int32Array(this.aBuf)

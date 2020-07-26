@@ -5,7 +5,7 @@ import Stream from "./stream"
  * Could've based it on my MadelineProto, but madeline.py's parser is way cleaner.
  */
 class Objects {
-    byId = {}
+    byId = []   // fixed. TODO: check it
     byPredicateAndLayer = {}
     layers = []
 
@@ -27,8 +27,8 @@ class Objects {
     constructor(schemes) {
         console.log("Parsing TL schemes")
         let data = [];
-        for (let [layer, scheme] of Object.entries(schemes)) {
-            layer = parseInt(layer)
+        for (let [layerStr, scheme] of Object.entries(schemes)) {
+            const layer = parseInt(layerStr)
 
             // Parse constructors
             for (let key in scheme['constructors']) {
@@ -132,7 +132,7 @@ class Objects {
                 this.layers.push(constructor['layer'])
             }
         }
-        this.layers.sort((a, b) => a < b)
+        this.layers.sort((a, b) => a < b ? 1 : -1)  // fixed. TODO: check it
     }
 
     findById(id) {

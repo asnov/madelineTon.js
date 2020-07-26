@@ -13,16 +13,17 @@ class ADNLConnection {
     requests = {}
     pings = {}
 
+    crypto;
+    socket;
+    pingId;
+
     /**
      * 
      * @param {Parser} TLParser 
      * @param {Object} endpoint 
      * @param {string} URI
      */
-    constructor(TLParser, key, uri) {
-        this.TLParser = TLParser
-        this.key = key
-        this.uri = uri
+    constructor(private TLParser, private key, private uri) {
         this.crypto = new CryptoAsync(this.TLParser)
     }
 

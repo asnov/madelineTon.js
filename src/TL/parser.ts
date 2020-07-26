@@ -22,10 +22,7 @@ class Parser {
      * Set TL Object store
      * @param {Objects} objects 
      */
-    constructor(objects, callbacks) {
-        this.objects = objects
-        this.callbacks = callbacks
-    }
+    constructor(private objects, private callbacks) { }
     /**
      * Set TL Object store
      * @param {Objects} objects 
@@ -76,6 +73,8 @@ class Parser {
                 return this.deserialize(gunzipSync(data.readBytes()), {
                     layer: type['layer']
                 })
+
+
             case 'dataJSON':
                 return JSON.parse(data.readString())
             case 'vector':
@@ -111,7 +110,8 @@ class Parser {
      * @param {mixed}  data   Data to serialize
      * @param {Object} type   TL type definition
      */
-    serialize(stream, data, type) {
+    serialize(stream, dataToSerialize: string, type) {
+        let data: any = dataToSerialize;
         type = type || {}
 
         switch (type['type']) {
@@ -120,9 +120,9 @@ class Parser {
             case "#":
                 return stream.writeUnsignedInt(data)
             case 'long':
-                if (typeof data === 'string' || data instanceof String) {
-                    data = Long.fromString(data, 10)
-                    data = [data.low_, data.high_]
+                if (typeof data === 'string') {
+                    const long = Long.fromString(data, 10)
+                    data = [long.low_, long.high_]
                 }
                 return stream.writeSignedLong(data)
             case 'int128':

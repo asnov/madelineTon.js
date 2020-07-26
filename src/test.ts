@@ -1,3 +1,8 @@
+import BitStream from "./boc/bitstream";
+import { igeDecrypt, igeEncrypt } from "./crypto-sync/crypto";
+import { fastRandomInt, secureRandomInt } from "./crypto-sync/random";
+import CryptoAsync from "./crypto";
+
 class Tester {
     compare(a, b, name) {
         b = new Uint32Array(b)
@@ -12,7 +17,7 @@ class Tester {
     }
     test() {
 
-        const test = new BitStream
+        const test = new BitStream(undefined)
         test.writeBits(5, 3)
         test.writeBits(1, 2)
         test.writeBits(0, 1)
@@ -43,17 +48,19 @@ class Tester {
 
 
         console.log("Starting async tests")
-        const magic = new CryptoAsync
+        const magic = new CryptoAsync(undefined)    // FIXME: pass TL
 
-        magic.secureRandomInt().then(r => console.log("Got " + r))
-        magic.igeEncrypt(input.slice(), key, iv).then(encOutput => {
+        magic.secureRandomInt(0).then(r => console.log("Got " + r)) // added 0. FIXME: check it
+        magic.igeEncrypt(input.slice(), key, iv)
+          .then(encOutput => {
             console.log(encOutput)
             this.compare(expected, encOutput, "IGE encrypt async")
             return magic.igeDecrypt(new Uint32Array(encOutput), key, iv)
-        }).then(decOutput => this.compare(input, decOutput, "IGE decrypt async"))
+        })
+          .then(decOutput => this.compare(input, decOutput, "IGE decrypt async"));
 
 
-        magic.getCtr(keyCtr, ivCtr)
+        (magic as any).getCtr(keyCtr, ivCtr)    // enabled. TODO: implement
             .then(processor => {
                 processor.process(new Uint32Array([0, 241]))
                     .then(r => this.compare([92269973, 2836914949, ], r, "CTR encrypt 1"))
