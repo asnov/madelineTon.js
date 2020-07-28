@@ -118,15 +118,19 @@ var CryptoJS = CryptoJS || (function (Math, undefined) {
              *     });
              */
             mixIn: function (properties) {
+                // it's unbelievable but this fixes the next TS error:
+                // error TS9005: Declaration emit for this file requires using private name 'mixIn'.
+                // An explicit type annotation may unblock declaration emit.
+                const _this = this;
                 for (var propertyName in properties) {
                     if (properties.hasOwnProperty(propertyName)) {
-                        this[propertyName] = properties[propertyName];
+                        _this[propertyName] = properties[propertyName];
                     }
                 }
 
                 // IE won't copy toString using the loop above
                 if (properties.hasOwnProperty('toString')) {
-                    this.toString = properties.toString;
+                    _this.toString = properties.toString;
                 }
             },
 
