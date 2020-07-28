@@ -13,6 +13,7 @@
     "prepare": "yarn run build"
   },
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "version": "1.0.10",
   "description": "Pure JS client-side implementation of the Telegram TON blockchain protocol",
   "author": "Daniil Gentili <daniil@daniil.it>",
@@ -24,11 +25,11 @@
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.7",
-    "@types/crypto-js": "^3.1.47",
-    "typescript": "^3.6.4"
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
+    "@types/crypto-js": "^3.1.47",
     "crypto-js": "^4.0.0",
     "deep-equal": "^2.0.1",
     "leemon": "^6.2.0",

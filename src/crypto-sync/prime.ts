@@ -34,17 +34,17 @@ import Stream from '../TL/stream'
 const toBuffers = (PBig, QBig) => {
     PBig = Stream.switcheroo(PBig)
     QBig = Stream.switcheroo(QBig)
-    let stream: Stream & ArrayBuffer = new Stream(new ArrayBuffer(8)) as any;   // TODO: check it
+    let stream: Stream & ArrayBuffer = new Stream(new ArrayBuffer(8)) as any;
     stream.writeUnsignedInt(PBig).writeUnsignedInt(QBig)
-    stream = stream.getBuffer()
+    stream = stream.getBuffer() as any;
     return [new Uint8Array(stream, 0, 4), new Uint8Array(stream, 4, 4)]
 }
 
 /**
  * Factorize using long library from Google Closure.
- * 
+ *
  * Usually the fastest on modern machines.
- * 
+ *
  * @param {number[]} PQ, low and high parts
  * @returns Uint8Array[] Factors
  */
@@ -109,9 +109,9 @@ const long = what => {
 
 /**
  * Factorize using leemon library
- * 
+ *
  * Slowest module, for some reason the most reliable on (very) old hardware
- * 
+ *
  * @param {number} PQ, low and high parts
  * @returns Uint8Array[] Factors
  */
@@ -197,7 +197,7 @@ const leemon = what => {
 
 /**
  * Universal factorization
- * 
+ *
  * @param {Uint8Array} Array of bytes with PQ
  * @returns Uint8Array[] Factors
  */

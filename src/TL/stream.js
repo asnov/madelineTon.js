@@ -7,16 +7,17 @@ import {
  * Using int*Array instead of DataView due to greater performance on older chrome browsers (might eventually also do a DataView wrapper)
  */
 class Stream {
+    pos = 0
+    aBuf
+    iBuf = new Int32Array(this.aBuf)
+    uBuf = new Uint32Array(this.aBuf)
+    bBuf = new Uint8Array(this.aBuf)
     /**
-     * 
+     *
      * @param {ArrayBuffer?} aBuf Buffer
      */
-    constructor(aBuf= undefined) {
-        this.pos = 0
-        this.aBuf = aBuf || new ArrayBuffer
-        this.iBuf = new Int32Array(this.aBuf)
-        this.uBuf = new Uint32Array(this.aBuf)
-        this.bBuf = new Uint8Array(this.aBuf)
+    constructor(aBuf = new ArrayBuffer) {
+        this.aBuf = aBuf
     }
     /**
      * Read signed 32 bit integer

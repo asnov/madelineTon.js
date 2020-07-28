@@ -1,5 +1,5 @@
 import Stream from "../TL/stream"
-import * as Rusha from 'rusha'
+import Rusha from 'rusha'
 import CryptoJS from '../lib/cryptoJS/crypto'
 import {
     transfer,
@@ -16,7 +16,7 @@ import {
     mod,
     bigInt2str
 } from "leemon"
-import * as nacl from '../lib/nacl-fast';
+import nacl from '../lib/nacl-fast';
 
 const modulo = str2bigInt('7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffed', 16)
 
@@ -109,9 +109,9 @@ const sha1 = data => rushaInstance.rawDigest(data).buffer
 
 /**
  * Encrypt using AES IGE
- * @param {Uint32Array} data 
- * @param {Uint32Array} key 
- * @param {Uint32Array} iv 
+ * @param {Uint32Array} data
+ * @param {Uint32Array} key
+ * @param {Uint32Array} iv
  * @returns {ArrayBuffer}
  */
 const igeEncrypt = (data, key, iv) => wordsToBytes(
@@ -127,13 +127,15 @@ const igeEncrypt = (data, key, iv) => wordsToBytes(
 
 /**
  * Decrypt using AES IGE
- * @param {Uint32Array} data 
- * @param {Uint32Array} key 
- * @param {Uint32Array} iv 
+ * @param {Uint32Array} data
+ * @param {Uint32Array} key
+ * @param {Uint32Array} iv
  * @returns {ArrayBuffer}
  */
 const igeDecrypt = (data, key, iv) => wordsToBytes(
     CryptoJS.AES.decrypt({
+            // iv: undefined,
+            // salt: undefined,
             ciphertext: bytesToWords(data)
         },
         bytesToWords(key), {

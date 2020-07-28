@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "allowJs": true,
     "module": "commonjs",
     "target": "es5",
     "sourceMap": true,
+    "allowJs": true,
+    "declaration": true,
     "lib": [
       "ESNext",
       "dom"
     ],
     "baseUrl": ".",
+    "esModuleInterop": true,
     "resolveJsonModule": true
   },
   "include": [

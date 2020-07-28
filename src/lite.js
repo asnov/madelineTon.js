@@ -155,7 +155,7 @@ class Lite {
      */
     deserializeCell(stream, size) {
         // Approximated TL-B schema
-        // cell$_ flags:(## 2) level:(## 1) hash:(## 1) exotic:(## 1) absent:(## 1) refCount:(## 2) 
+        // cell$_ flags:(## 2) level:(## 1) hash:(## 1) exotic:(## 1) absent:(## 1) refCount:(## 2)
         let result = {}
         result.flags = stream.readBits(2)
         result.level = stream.readBits(1)

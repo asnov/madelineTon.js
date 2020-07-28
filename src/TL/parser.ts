@@ -20,12 +20,12 @@ import Long from "../lib/bigint/long"
 class Parser {
     /**
      * Set TL Object store
-     * @param {Objects} objects 
+     * @param {Objects} objects
      */
     constructor(private objects, private callbacks) { }
     /**
      * Set TL Object store
-     * @param {Objects} objects 
+     * @param {Objects} objects
      */
     setObjectStore(objects) {
         this.objects = objects
@@ -122,7 +122,7 @@ class Parser {
             case 'long':
                 if (typeof data === 'string') {
                     const long = Long.fromString(data, 10)
-                    data = [long.low_, long.high_]
+                    data = [long.getLowBits(), long.getHighBits()]
                 }
                 return stream.writeSignedLong(data)
             case 'int128':
