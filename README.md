@@ -31,8 +31,8 @@ Which is why I developed this pure-JS lite-client, which can be directly downloa
 
 I initially intended to create also a very basic ad network smart contract, but then decided to focus all efforts on finishing this library, first.
 
-TL-B parser, fift interpreter and TVM are all on the roadmap in this order (TL-B in particular should be pretty easy with the current TL parser and my bitstream.js, with the only real problem being template parameters (damn you Unary)).
-BOC deserialization is implemented in lite.js (builder/slice is represented by a BitStream, a cell is a Uint8Array).
+TL-B parser, fift interpreter and TVM are all on the roadmap in this order (TL-B in particular should be pretty easy with the current TL parser and my bitstream.ts, with the only real problem being template parameters (damn you Unary)).
+BOC deserialization is implemented in lite.ts (builder/slice is represented by a BitStream, a cell is a Uint8Array).
 
 
 ## Other projects

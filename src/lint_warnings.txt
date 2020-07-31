@@ -66,7 +66,7 @@ Warning:(31, 12) Unresolved variable or type 'leemonBigInt'
 Warning:(32, 12) Unresolved variable or type 'leemonBigInt'
 /Users/alexnew/FreeTON/madelineTon.js/src/lib/rng.ts
 Warning:(32, 5) Variable might not have been initialized
-/Users/alexnew/FreeTON/madelineTon.js/src/crypto/crypto-worker.js
+/Users/alexnew/FreeTON/madelineTon.js/src/crypto/crypto-worker.ts
 Warning:(75, 29) Parameter data described in JSDoc does not appear in function signature
 Warning:(78, 10) Parameter buffer is not described in JSDoc
 Warning:(86, 29) Parameter data described in JSDoc does not appear in function signature

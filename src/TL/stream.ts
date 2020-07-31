@@ -248,21 +248,21 @@ class Stream {
     }
 }
 
-Stream.bigEndian = new Int8Array(new Uint16Array([0x1234]).buffer)[1] === 0x34
+(Stream as any).bigEndian = new Int8Array(new Uint16Array([0x1234]).buffer)[1] === 0x34;
 
-if (Stream.bigEndian) { // Big-endian hacks
-    Stream.prototype.readSignedInt = function () {
+if ((Stream as any).bigEndian) { // Big-endian hacks
+    (Stream as any).prototype.readSignedInt = function () {
         return this.switcheroo(this.iBuf[this.pos++])
-    }
-    Stream.prototype.writeSignedInt = function (value) {
+    };
+    (Stream as any).prototype.writeSignedInt = function (value) {
         this.iBuf[this.pos++] = this.switcheroo(value)
-    }
-    Stream.prototype.readUnsignedInt = function () {
+    };
+    (Stream as any).prototype.readUnsignedInt = function () {
         return this.switcheroo(this.uBuf[this.pos++])
-    }
-    Stream.prototype.writeUnsignedInt = function (value) {
+    };
+    (Stream as any).prototype.writeUnsignedInt = function (value) {
         this.uBuf[this.pos++] = this.switcheroo(value)
-    }
+    };
 }
 
 

@@ -1,0 +1,100 @@
+/Users/alexnew/code/FreeTON/madelineTon.js/src/lib/cryptoJS/crypto.ts
+Warning:(1, 1) Unused import {
+    incCounterBigEndian
+} from "../../crypto-sync/crypto";
+Warning:(222, 26) Duplicate declaration
+Warning:(228, 26) Duplicate declaration
+Warning:(236, 26) Duplicate declaration
+Warning:(558, 21) Unused local variable processedWords
+Warning:(590, 9) Unused local variable Hasher
+Warning:(672, 17) Local variable 'hash' is redundant
+Warning:(745, 9) Unused local variable Utf8
+Warning:(881, 17) Local variable 'finalProcessedData' is redundant
+Warning:(935, 9) Unused local variable StreamCipher
+Warning:(938, 17) Local variable 'finalProcessedBlocks' is redundant
+Warning:(1167, 9) Unused local variable NoPadding
+Warning:(1179, 9) Unused local variable BlockCipher
+Warning:(1202, 21) Duplicate declaration
+Warning:(1202, 21) Unused local variable modeCreator
+Warning:(1204, 21) Duplicate declaration
+Warning:(1204, 21) Unused local variable modeCreator
+Warning:(1226, 21) Duplicate declaration
+Warning:(1226, 21) Unused local variable finalProcessedBlocks
+Warning:(1229, 21) Duplicate declaration
+Warning:(1252, 19) Unresolved variable or type 'Format'
+Warning:(1281, 20) Unresolved variable or type 'Format'
+Warning:(1327, 21) Duplicate declaration
+Warning:(1327, 21) Unused local variable wordArray
+Warning:(1329, 21) Duplicate declaration
+Warning:(1329, 21) Unused local variable wordArray
+Warning:(1358, 21) Unused local variable salt
+Warning:(1379, 23) Unresolved variable or type 'Formatter'
+Warning:(1452, 17) Local variable 'plaintext' is redundant
+Warning:(1462, 20) Unresolved variable or type 'Formatter'
+Warning:(1539, 23) Unresolved variable or type 'KDF'
+Warning:(1612, 17) Local variable 'plaintext' is redundant
+Warning:(1651, 18) Duplicate declaration
+Warning:(1662, 18) Duplicate declaration
+Warning:(1675, 17) Duplicate declaration
+Warning:(1682, 17) Duplicate declaration
+Warning:(1719, 22) Duplicate declaration
+Warning:(1723, 25) Duplicate declaration
+Warning:(1746, 21) Duplicate declaration
+Warning:(1749, 25) Duplicate declaration
+Warning:(1749, 25) Unused local variable t
+Warning:(1751, 25) Duplicate declaration
+Warning:(1751, 25) Unused local variable t
+Warning:(1769, 17) Duplicate declaration
+Warning:(1776, 17) Duplicate declaration
+Warning:(1797, 21) Duplicate declaration
+Warning:(1798, 21) Duplicate declaration
+Warning:(1799, 21) Duplicate declaration
+Warning:(1800, 21) Duplicate declaration
+Warning:(1810, 17) Duplicate declaration
+Warning:(1811, 17) Duplicate declaration
+Warning:(1812, 17) Duplicate declaration
+Warning:(1813, 17) Duplicate declaration
+/Users/alexnew/code/FreeTON/madelineTon.js/wallaby.js
+Warning:(1, 28) Unused parameter w
+/Users/alexnew/code/FreeTON/madelineTon.js/src/test.ts
+Warning:(6, 7) Unused class Tester
+/Users/alexnew/code/FreeTON/madelineTon.js/src/TL/parser.ts
+Warning:(25, 34) Parameter callbacks is not described in JSDoc
+Warning:(89, 40) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(92, 28) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(95, 45) Bitwise operator used
+Warning:(99, 20) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(107, 16) Unresolved variable or type 'mixed'
+Warning:(175, 45) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(186, 40) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(190, 27) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(204, 40) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(206, 29) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(257, 93) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(279, 41) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+/Users/alexnew/code/FreeTON/madelineTon.js/src/boc/bitstream.ts
+Warning:(48, 16) Unresolved variable or type 'bool'
+Warning:(71, 17) Fallthrough in 'switch' statement. Missing 'break' or 'return'
+/Users/alexnew/code/FreeTON/madelineTon.js/src/crypto/crypto-webcrypto.ts
+Warning:(61, 13) 'offset = this.leftover.byteLength' used as condition
+/Users/alexnew/code/FreeTON/madelineTon.js/src/crypto/crypto-worker.ts
+Warning:(75, 29) Parameter data described in JSDoc does not appear in function signature
+Warning:(78, 10) Parameter buffer is not described in JSDoc
+Warning:(86, 29) Parameter data described in JSDoc does not appear in function signature
+Warning:(89, 12) Parameter buffer is not described in JSDoc
+Warning:(127, 16) Unresolved variable or type 'leemonBigInt'
+Warning:(128, 16) Unresolved variable or type 'leemonBigInt'
+Warning:(129, 16) Unresolved variable or type 'leemonBigInt'
+Warning:(130, 18) Unresolved variable or type 'leemonBigInt'
+/Users/alexnew/code/FreeTON/madelineTon.js/src/lite.ts
+Warning:(135, 33) Bitwise operator used
+Warning:(242, 80) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(243, 92) Possible iteration over unexpected (custom / inherited) members, probably missing hasOwnProperty check
+Warning:(272, 51) Bitwise operator used
+/Users/alexnew/code/FreeTON/madelineTon.js/src/lib/bigint/long.ts
+Warning:(406, 13) Duplicate declaration
+Warning:(410, 13) Duplicate declaration
+Warning:(411, 13) Local variable 'result' is redundant
+Warning:(435, 9) Duplicate declaration
+Warning:(439, 11) Duplicate declaration
+Warning:(698, 12) if statement can be simplified

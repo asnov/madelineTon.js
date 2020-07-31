@@ -36,10 +36,7 @@ class Parser {
      * @param {Stream} data Data
      * @param {Object} type Type info
      */
-    deserialize(data, type) {
-        type = type || {
-            type: ''
-        }
+    deserialize(data, type = {type: ''}) {
         switch (type['type']) {
             case 'int':
                 return data.readSignedInt()
@@ -107,12 +104,11 @@ class Parser {
     /**
      * Serialize TL
      * @param {Stream} stream Stream
-     * @param {mixed}  data   Data to serialize
+     * @param {mixed}  dataToSerialize   Data to serialize
      * @param {Object} type   TL type definition
      */
-    serialize(stream, dataToSerialize: string, type) {
+    serialize(stream, dataToSerialize: any, type = {}) {
         let data: any = dataToSerialize;
-        type = type || {}
 
         switch (type['type']) {
             case 'int':

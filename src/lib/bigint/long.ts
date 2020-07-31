@@ -923,9 +923,9 @@ const MIN_VALUE_ = Long.fromBits(0, 0x80000000);
 const TWO_PWR_24_ = Long.fromBits(1 << 24, 0);
 
 
-Long.ZERO = ZERO_
-Long.ONE = ONE_
-Long.THREE = new Long(3, 0)
-Long.FOUR = new Long(4, 0)
+(Long as any).ZERO = ZERO_;
+(Long as any).ONE = ONE_;
+(Long as any).THREE = new Long(3, 0);
+(Long as any).FOUR = new Long(4, 0);
 
 export default Long;

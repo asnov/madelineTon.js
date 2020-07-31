@@ -1,53 +1,101 @@
-import Objects from "./TL/objects";
-import Parser from "./TL/parser";
-import Stream from "./TL/stream";
-import ADNLConnection from "./adnl-connection";
-import {
-    fastRandomInt
-} from "./crypto-sync/random";
+import Objects from './TL/objects';
+import Parser from './TL/parser';
+import Stream from './TL/stream';
+import ADNLConnection from './adnl-connection';
+import { fastRandomInt } from './crypto-sync/random';
 import deepEqual from 'deep-equal'
-import {
-    bufferViewEqual,
-    atobInt8
-} from "./tools";
-import CryptoAsync from "./crypto";
-import {
-    crc16
-} from "./crypto-sync/crypto";
+import { atobInt8, bufferViewEqual } from './tools';
+import CryptoAsync from './crypto';
+import { crc16 } from './crypto-sync/crypto';
 import schemeTON from './config/ton_api.json'
 import schemeLite from './config/lite_api.json'
 import liteConfig from './config/ton-lite-client-test1.config.json'
-import BitStream from "./boc/bitstream";
+import BitStream from './boc/bitstream';
+import CryptoWorker from './crypto/crypto-worker';
+import CryptoSync from './crypto/crypto-sync';
+
+export interface ISettings {
+    schemes: {
+        1: typeof schemeTON,
+        2: typeof schemeLite,
+    },
+    config: typeof liteConfig,
+    wssProxies: {
+        [key: number]: string,
+    }
+}
+
+interface ISlice {
+    _: string,
+    has_idx: number | Uint8Array,
+    has_crc32c: number | Uint8Array,
+    has_cache_bits: number | Uint8Array,
+    flags: number | Uint8Array,
+    size: number & Uint8Array,
+    off_bytes: number | Uint8Array,
+    cell_count: number | Uint8Array,
+    roots: number | Uint8Array,
+    absent: number | Uint8Array,
+    tot_cells_size: number | Uint8Array,
+    root_list: number | Uint8Array,
+    index: number | Uint8Array,
+    cell_data: number | Uint8Array,
+    crc32c: number | Uint8Array,
+    cellsRaw: Partial<ICell>[],
+    cells: BitStream[],
+    root: BitStream,
+}
+
+interface ICell {
+    flags: Uint8Array,
+    level: Uint8Array,
+    hash: Uint8Array,
+    exotic: Uint8Array,
+    absent: Uint8Array,
+    refs: Uint8Array[],
+    refCount: Uint8Array,
+    length:Uint8Array,
+    lengthHasBits:Uint8Array,
+    data: Uint8Array,
+}
 
 class Lite {
     min_ls_version = 0x101
     min_ls_capabilities = 1
     server = {
-        ok: false
+        ok: false,
+        version: 0,
     }
+    serverTime: number;
+    zeroState;
+    gotServerTimeAt: number;
+    lastMasterchainId;
 
     knownBlockIds = []
     printedBlockIds = 0
 
     connections = []
-    constructor(settings) {
-        settings = {
-            ...settings,
-            schemes: {
-                1: schemeTON,
-                2: schemeLite
-            },
-            config: liteConfig,
-            wssProxies: {
-                861606190: 'wss://ton-ws.madelineproto.xyz/testnetDebug',
-                1137658550: 'wss://ton-ws.madelineproto.xyz/testnet'
-            }
-        }
-        let config = settings.config
-        delete settings.config
-        this.settings = settings
 
-        this.TLObjects = new Objects(settings['schemes'])
+    settings: Partial<ISettings>;
+    TLObjects: Objects;
+    TLParser: Parser;
+    config;
+    crypto: CryptoWorker | CryptoSync;
+
+    constructor({
+                    schemes = {
+                        1: schemeTON,
+                        2: schemeLite
+                    },
+                    config = liteConfig,
+                    wssProxies = {
+                        861606190: 'wss://ton-ws.madelineproto.xyz/testnetDebug',
+                        1137658550: 'wss://ton-ws.madelineproto.xyz/testnet'
+                    },
+                }: Partial<ISettings>) {
+        this.settings = {schemes, wssProxies};
+
+        this.TLObjects = new Objects(schemes);
         this.TLParser = new Parser(
             this.TLObjects, {
                 typeConversion: {
@@ -55,6 +103,7 @@ class Lite {
                 }
             }
         )
+        this.crypto = new CryptoAsync(this.TLParser)
 
         let stream = new Stream
 
@@ -62,10 +111,8 @@ class Lite {
         config['_'] = 'liteclient.config.global'
         config['validator']['init_block'] = config['validator']['init_block'] || config['validator']['zero_state']
         config = this.TLParser.serialize(stream, config)
-        config.pos = 0
+        config['pos'] = 0
         this.config = this.TLParser.deserialize(config)
-
-        this.crypto = new CryptoAsync(this.TLParser)
     }
     /**
      * Unpack account ID to a liteServer.accountId object
@@ -77,25 +124,24 @@ class Lite {
         if (!bufferViewEqual(crc, data.subarray(34))) {
             throw new Error('Invalid account ID provided, crc16 invalid!')
         }
-        let result = {
-            _: 'liteServer.accountId',
-            flags: data[0]
-        }
-        if ((result.flags & 0x3f) != 0x11) {
+        const flags = data[0];
+        if ((flags & 0x3f) != 0x11) {
             throw new Error('Invalid account ID, wrong flags')
         }
-        result.testnet = result.flags & 0x80
-        result.bounceable = !(result.flags & 0x40)
-        result.workchain = data[1] > 0x7F ? -(data[1] - 0xFF) : data[1]
-        result.id = new Uint32Array(data.slice(2, 34).buffer)
-
-        return result
+        return {
+            _: 'liteServer.accountId',
+            flags,
+            testnet: flags & 0x80,
+            bounceable: !(flags & 0x40),
+            workchain: data[1] > 0x7F ? -(data[1] - 0xFF) : data[1],
+            id: new Uint32Array(data.slice(2, 34).buffer),
+        }
     }
     /**
      * Deserialize bag of cells
      * @param {Uint8Array} cell Serialized cell data
      */
-    slice(cell) {
+    slice(cell: Uint8Array): Partial<ISlice> {
         if (!cell.byteLength) {
             return {}
         }
@@ -107,7 +153,7 @@ class Lite {
         if (crc !== 3052313714) {
             throw new Error(`Invalid BOC constructor ${crc}`)
         }
-        let result = {
+        let result: Partial<ISlice> = {
             _: 'serialized_boc',
             has_idx: stream.readBits(1),
             has_crc32c: stream.readBits(1),
@@ -156,14 +202,14 @@ class Lite {
     deserializeCell(stream, size) {
         // Approximated TL-B schema
         // cell$_ flags:(## 2) level:(## 1) hash:(## 1) exotic:(## 1) absent:(## 1) refCount:(## 2)
-        let result = {}
-        result.flags = stream.readBits(2)
-        result.level = stream.readBits(1)
-        result.hash = stream.readBits(1)
-        result.exotic = stream.readBits(1)
-        result.absent = stream.readBits(1)
-        result.refCount = stream.readBits(2)
-
+        let result: Partial<ICell> = {
+            flags: stream.readBits(2),
+            level: stream.readBits(1),
+            hash: stream.readBits(1),
+            exotic: stream.readBits(1),
+            absent: stream.readBits(1),
+            refCount: stream.readBits(2),
+        };
         if (result.absent) {
             throw new Error("Can't deserialize absent cell!")
         }
@@ -273,15 +319,15 @@ class Lite {
 
     // Parser functions
 
-    _setServerVersion(server) {
+    private _setServerVersion(server) {
         this.server = server
         this.server.ok = (server.version >= this.min_ls_version) && !(~server.capabilities[0] & this.min_ls_capabilities);
     }
-    _setServerTime(time) {
+    private _setServerTime(time: number) {
         this.serverTime = time
         this.gotServerTimeAt = Date.now() / 1000 | 0
     }
-    _parseMasterchainInfo(info) {
+    private _parseMasterchainInfo(info) {
         const last = info.last
         const zero = info.init
         const last_utime = info.last_utime || 0
